@@ -7,16 +7,16 @@ pub struct Plane<T> {
 }
 
 impl<T> Plane<T> {
-    fn new() -> Plane<T> {
+    pub fn new() -> Plane<T> {
         return Plane { data: Vec::new(), width: 0, height: 0 };
     }
 
-    fn filled(width: usize, height: usize, item: T) -> Plane<T>
+    pub fn filled(width: usize, height: usize, item: T) -> Plane<T>
     where T: Clone {
         return Plane { data: vec![vec![item; width]; height], width, height };
     }
 
-    fn push_row(&mut self, row: Vec<T>) {
+    pub fn push_row(&mut self, row: Vec<T>) {
         if self.height == 0 {
             self.width = row.len();
         }
@@ -25,7 +25,7 @@ impl<T> Plane<T> {
         self.data.push(row);
     }
 
-    fn push_col(&mut self, col: Vec<T>) {
+    pub fn push_col(&mut self, col: Vec<T>) {
         if self.width == 0 {
             self.height = col.len();
         }
@@ -37,13 +37,13 @@ impl<T> Plane<T> {
         }
     }
 
-    fn get<I>(&self, index: I) -> Option<&T>
+    pub fn get<I>(&self, index: I) -> Option<&T>
     where I: Coord2 {
         let t = index.to_tuple();
         return self.data.get(t.1 as usize)?.get(t.0 as usize);
     }
 
-    fn get_mut<I>(&mut self, index: I) -> Option<&mut T>
+    pub fn get_mut<I>(&mut self, index: I) -> Option<&mut T>
     where I: Coord2 {
         let t = index.to_tuple();
         return self.data.get_mut(t.1 as usize)?.get_mut(t.0 as usize);

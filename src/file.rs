@@ -23,5 +23,9 @@ pub fn read_to_lines(filename: &str) -> Vec<String> {
 }
 
 pub fn read_to_byte_plane(filename: &str) -> Plane<u8> {
-    
+    let mut plane = Plane::new();
+    for l in read_to_lines(filename) {
+        plane.push_row(l.into_bytes());
+    }
+    return plane;
 }

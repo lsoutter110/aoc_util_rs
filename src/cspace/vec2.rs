@@ -7,23 +7,23 @@ pub struct Vec2 {
 }
 
 impl Vec2 {
-    fn new(x: i32, y: i32) -> Vec2 {
+    pub fn new(x: i32, y: i32) -> Vec2 {
         return Vec2 { x, y };
     }
 
-    fn up(&self) -> Vec2 {
+    pub fn up(&self) -> Vec2 {
         return Vec2 { x: self.x, y: self.y - 1 };
     }
 
-    fn down(&self) -> Vec2 {
+    pub fn down(&self) -> Vec2 {
         return Vec2 { x: self.x, y: self.y + 1 };
     }
 
-    fn left(&self) -> Vec2 {
+    pub fn left(&self) -> Vec2 {
         return Vec2 { x: self.x - 1, y: self.y };
     }
 
-    fn right(&self) -> Vec2 {
+    pub fn right(&self) -> Vec2 {
         return Vec2 { x: self.x + 1, y: self.y };
     }
 }
