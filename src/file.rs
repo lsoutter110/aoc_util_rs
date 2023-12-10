@@ -1,3 +1,5 @@
+use crate::cspace::Plane;
+
 pub fn read_to_string(filename: &str) -> String {
     use std::{fs::File, path::Path, io::Read};
     let path = Path::new(filename);
@@ -18,4 +20,8 @@ pub fn read_to_string(filename: &str) -> String {
 
 pub fn read_to_lines(filename: &str) -> Vec<String> {
     return read_to_string(filename).split("\n").map(|line| line.to_string()).collect();
+}
+
+pub fn read_to_byte_plane(filename: &str) -> Plane<u8> {
+    
 }
