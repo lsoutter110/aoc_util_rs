@@ -25,6 +25,16 @@ impl<T> Plane<T> {
         self.data.push(row);
     }
 
+    pub fn insert_row(&mut self, index: i32, row: Vec<T>) {
+        if self.height == 0 {
+            self.width = row.len() as i32;
+        }
+        assert!(row.len() == self.width as usize, "Row width to push did not match plane width!");
+        assert!(index <= self.height, "Index outside of plane!");
+        self.height += 1;
+        self.data.insert(index as usize, row);
+    }
+
     pub fn push_col(&mut self, col: Vec<T>) {
         if self.width == 0 {
             self.height = col.len() as i32;
@@ -34,6 +44,19 @@ impl<T> Plane<T> {
         let mut col = col.into_iter();
         for row in &mut self.data {
             row.push(col.next().unwrap());
+        }
+    }
+
+    pub fn insert_col(&mut self, index: i32, col: Vec<T>) {
+        if self.width == 0 {
+            self.height = col.len() as i32;
+        }
+        assert!(col.len() == self.height as usize, "Col width to push did not match plane height!");
+        assert!(index <= self.width, "Index outside of plane!");
+        self.width += 1;
+        let mut col = col.into_iter();
+        for row in &mut self.data {
+            row.insert(index as usize, col.next().unwrap());
         }
     }
 
