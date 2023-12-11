@@ -2,8 +2,8 @@ use super::Coord2;
 
 pub struct Plane<T> {
     data: Vec<Vec<T>>,
-    width: usize,
-    height: usize,
+    pub width: i32,
+    pub height: i32,
 }
 
 impl<T> Plane<T> {
@@ -11,25 +11,25 @@ impl<T> Plane<T> {
         return Plane { data: Vec::new(), width: 0, height: 0 };
     }
 
-    pub fn filled(width: usize, height: usize, item: T) -> Plane<T>
+    pub fn filled(width: i32, height: i32, item: T) -> Plane<T>
     where T: Clone {
-        return Plane { data: vec![vec![item; width]; height], width, height };
+        return Plane { data: vec![vec![item; width as usize]; height as usize], width, height };
     }
 
     pub fn push_row(&mut self, row: Vec<T>) {
         if self.height == 0 {
-            self.width = row.len();
+            self.width = row.len() as i32;
         }
-        assert!(row.len() == self.width, "Row width to push did not match plane width!");
+        assert!(row.len() == self.width as usize, "Row width to push did not match plane width!");
         self.height += 1;
         self.data.push(row);
     }
 
     pub fn push_col(&mut self, col: Vec<T>) {
         if self.width == 0 {
-            self.height = col.len();
+            self.height = col.len() as i32;
         }
-        assert!(col.len() == self.height, "Col width to push did not match plane height!");
+        assert!(col.len() == self.height as usize, "Col width to push did not match plane height!");
         self.width += 1;
         let mut col = col.into_iter();
         for row in &mut self.data {

@@ -1,6 +1,6 @@
 use super::Coord2;
 
-#[derive(Copy,Clone,Debug)]
+#[derive(Copy,Clone,Debug,PartialEq,Eq)]
 pub struct Vec2 {
     pub x: i32,
     pub y: i32,
@@ -38,16 +38,18 @@ impl Coord2 for Vec2 {
     }
 }
 
-impl std::ops::Add<Vec2> for Vec2 {
+impl<A> std::ops::Add<A> for Vec2 where A: Coord2 {
     type Output = Vec2;
-    fn add(self, rhs: Vec2) -> Self::Output {
-        return Vec2 { x: self.x + rhs.x, y: self.y + rhs.y };
+    fn add(self, rhs: A) -> Self::Output {
+        let rhs = rhs.to_tuple();
+        return Vec2 { x: self.x + rhs.0, y: self.y + rhs.1 };
     }
 }
 
-impl std::ops::Add<(i32, i32)> for Vec2 {
+impl<A> std::ops::Sub<A> for Vec2 where A: Coord2 {
     type Output = Vec2;
-    fn add(self, rhs: (i32, i32)) -> Self::Output {
-        return Vec2 { x: self.x + rhs.0, y: self.y + rhs.1 };
+    fn sub(self, rhs: A) -> Self::Output {
+        let rhs = rhs.to_tuple();
+        return Vec2 { x: self.x - rhs.0, y: self.y - rhs.1 };
     }
 }

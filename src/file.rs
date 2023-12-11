@@ -22,6 +22,14 @@ pub fn read_to_lines(filename: &str) -> Vec<String> {
     return read_to_string(filename).split("\n").map(|line| line.to_string()).collect();
 }
 
+pub fn read_to_char_plane(filename: &str) -> Plane<char> {
+    let mut plane = Plane::new();
+    for l in read_to_lines(filename) {
+        plane.push_row(l.chars().collect());
+    }
+    return plane;
+}
+
 pub fn read_to_byte_plane(filename: &str) -> Plane<u8> {
     let mut plane = Plane::new();
     for l in read_to_lines(filename) {
